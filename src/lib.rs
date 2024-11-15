@@ -1,4 +1,5 @@
 // Represents a 1-dimensional map folding.
+#[derive(Debug)]
 pub struct MapFolding {
     // Representation of the folding in the standard stack form.
     // The number of the lowest segment is at index 0 in the vector.
@@ -19,7 +20,7 @@ impl MapFolding {
             present[*segment as usize] = true;
         }
 
-        let all_present = present.iter().all(|&p| p);
+        let all_present = present.iter().skip(1).all(|&p| p);
         if all_present {
             return Ok(MapFolding { indices })
         }
@@ -37,5 +38,18 @@ impl MapFolding {
 
     pub fn is_valid_fold(&self) -> bool {
         todo!()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn from_standard_stack_8_zigzag() {
+        let indices = [1, 2, 3, 4, 5, 6, 7, 8];
+        let created = MapFolding::from_standard_stack(&indices).expect("failed to parse indices");
+        let expected = vec![1, 2, 3, 4, 5, 6, 7, 8];
+        assert_eq!(created.indices, expected, "indices do not match");
     }
 }
