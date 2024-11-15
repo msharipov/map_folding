@@ -147,10 +147,10 @@ mod tests {
 
     #[test]
     fn from_standard_stack_8_zigzag() {
-        let indices = [1, 2, 3, 4, 5, 6, 7, 8];
-        let created = MapFolding::from_stack(&indices).expect("failed to parse indices");
+        let stack = [1, 2, 3, 4, 5, 6, 7, 8];
+        let created = MapFolding::from_stack(&stack).expect("failed to parse stack");
         let expected = vec![1, 2, 3, 4, 5, 6, 7, 8];
-        assert_eq!(created.indices, expected, "indices do not match");
+        assert_eq!(created.indices, expected);
     }
 
     #[test]
