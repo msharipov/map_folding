@@ -178,14 +178,14 @@ mod tests {
     }
 
     #[test]
-    fn is_possible_8_zigzag() {
+    fn is_foldable_8_zigzag() {
         let zigzag =
             MapFolding::from_stack(&[1, 2, 3, 4, 5, 6, 7, 8]).expect("failed to parse stack");
         assert!(zigzag.is_foldable());
     }
 
     #[test]
-    fn is_possible_impossible_stack() {
+    fn is_foldable_impossible_stack() {
         let f = MapFolding::from_stack(&[5, 4, 3, 6, 2, 7, 1, 8]).expect("failed to parse stack");
         assert!(!f.is_foldable());
     }
