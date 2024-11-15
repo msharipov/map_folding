@@ -8,6 +8,25 @@ pub struct MapFolding {
 
 impl MapFolding {
 
+    /// Attempts to create a 1-dimensional map folding based on a list of segments
+    /// written in the standard stack notation. 
+    ///
+    /// The standard stack notation requires that:
+    /// 1. Segment #1 is facing the same way as it did before the map was folded.
+    /// 2. The segments are listed in the same order in which they appear in the stack,
+    ///    starting from the bottom. That is, the number of the lowest segment in the
+    ///    stack is the first value in the list and vice versa.
+    ///
+    /// # Errors
+    ///
+    /// This function returns an error if the supplied list of segments is incoherent.
+    /// However, it does not check whether the map folding in question is physically
+    /// possible. Impossible foldings can be created with this function!
+    ///
+    /// # Example:
+    /// ```
+    /// let f = MapFolding::from_standard_stack(vec![1, 3, 4, 2]).unwrap();
+    /// ```
     pub fn from_standard_stack(stack: &[u64]) -> Result<Self, ()> {
         let indices = Vec::from(stack);
         let n = indices.len();
