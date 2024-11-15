@@ -146,7 +146,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn from_standard_stack_8_zigzag() {
+    fn from_stack_8_zigzag() {
         let stack = [1, 2, 3, 4, 5, 6, 7, 8];
         let created = MapFolding::from_stack(&stack).expect("failed to parse stack");
         let expected = vec![1, 2, 3, 4, 5, 6, 7, 8];
@@ -154,25 +154,25 @@ mod tests {
     }
 
     #[test]
-    fn from_standard_stack_invalid_indices() {
+    fn from_stack_invalid_indices() {
         let indices = [2, 5, 4, 3];
         assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
     }
 
     #[test]
-    fn from_standard_stack_invalid_indices_2() {
+    fn from_stack_invalid_indices_2() {
         let indices = [0, 1, 2, 3, 4];
         assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
     }
 
     #[test]
-    fn from_standard_stack_missing_indices() {
+    fn from_stack_missing_indices() {
         let indices = [5, 3, 1, 2, 1];
         assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
     }
 
     #[test]
-    fn from_standard_stack_extra_indices() {
+    fn from_stack_extra_indices() {
         let indices = [5, 3, 4, 5, 2, 1];
         assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
     }
