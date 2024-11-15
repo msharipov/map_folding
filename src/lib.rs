@@ -55,6 +55,20 @@ impl MapFolding {
         }
         Err(())
     }
+    
+    /// Returns the standard stack representation of the map folding as a list
+    /// of segments.
+    ///
+    /// # Example
+    /// ```
+    /// # use map_folding::MapFolding;
+    /// let f = MapFolding::from_standard_stack(&vec![5, 2, 3, 4, 1]).unwrap();
+    ///
+    /// assert_eq!(f.standard_stack(), vec![5, 2, 3, 4, 1]);
+    /// ```
+    pub fn standard_stack(&self) -> &[u64] {
+        &self.indices[..]
+    }
 
     pub fn positions(&self) -> Vec<usize> {
         let n = self.indices.len();
