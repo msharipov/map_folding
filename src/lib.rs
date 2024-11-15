@@ -25,7 +25,10 @@ impl MapFolding {
     ///
     /// # Example:
     /// ```
-    /// let f = MapFolding::from_standard_stack(vec![1, 3, 4, 2]).unwrap();
+    /// # use map_folding::MapFolding;
+    /// let f = MapFolding::from_standard_stack(&vec![1, 3, 4, 2]).unwrap();
+    ///
+    /// assert_eq!(format!("{:?}", f.standard_stack()), "[1, 3, 4, 2]");
     /// ```
     pub fn from_standard_stack(stack: &[u64]) -> Result<Self, ()> {
         let indices = Vec::from(stack);
