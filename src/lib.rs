@@ -11,8 +11,17 @@ impl MapFolding {
         let indices = Vec::from(stack);
         let n = indices.len();
 
-        if *indices.iter().min().unwrap() != 1 || *indices.iter().max().unwrap() as usize != n {
-            return Err(())
+        let min_index = match indices.iter().min() {
+            Some(&index) => index,
+            None => return Err(()),
+        };
+        let max_index = match indices.iter().max() {
+            Some(&index) => index as usize,
+            None => return Err(()),
+        };
+
+        if min_index != 1 || max_index != n {
+            return Err(());
         }
 
         let mut present = vec![true; n + 1]; // 0th value is unused
@@ -22,7 +31,7 @@ impl MapFolding {
 
         let all_present = present.iter().skip(1).all(|&p| p);
         if all_present {
-            return Ok(MapFolding { indices })
+            return Ok(MapFolding { indices });
         }
         Err(())
     }
