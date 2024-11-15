@@ -61,4 +61,22 @@ mod tests {
         let expected = vec![1, 2, 3, 4, 5, 6, 7, 8];
         assert_eq!(created.indices, expected, "indices do not match");
     }
+
+    #[test]
+    fn from_standard_stack_invalid_indices() {
+        let indices = [2, 5, 4, 3];
+        assert_eq!((), MapFolding::from_standard_stack(&indices).unwrap_err());
+    }
+
+    #[test]
+    fn from_standard_stack_invalid_indices_2() {
+        let indices = [0, 1, 2, 3, 4];
+        assert_eq!((), MapFolding::from_standard_stack(&indices).unwrap_err());
+    }
+
+    #[test]
+    fn from_standard_stack_missing_indices() {
+        let indices = [5, 3, 1, 2, 1];
+        assert_eq!((), MapFolding::from_standard_stack(&indices).unwrap_err());
+    }
 }
