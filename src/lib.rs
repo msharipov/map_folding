@@ -72,7 +72,24 @@ impl MapFolding {
         &self.indices[..]
     }
 
-    /// Returns a vector that lists the position of
+    /// Returns a vector that lists the positions of each segment in the standard
+    /// stack representation of the map folding.
+    ///
+    /// The zero-indexed position of the segment N is located at index N in the
+    /// returned vector.
+    ///
+    /// **CAUTION**: the first value in the vector is unused, since the segments are
+    /// counted starting from 1.
+    ///
+    /// # Example
+    /// ```
+    /// # use map_folding::MapFolding;
+    /// let f = MapFolding::from_stack(&[4, 5, 3, 1, 2]).unwrap();
+    ///
+    /// assert_eq!(f.positions()[3], 2);
+    /// assert_eq!(f.positions()[2], 4);
+    /// assert_eq!(f.positions()[4], 0);
+    /// ```
     pub fn positions(&self) -> Vec<usize> {
         let n = self.indices.len();
         let mut positions: Vec<usize> = vec![0; n + 1]; // 0th value is unused
