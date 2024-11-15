@@ -4,7 +4,7 @@ use clap::{arg, command, value_parser, ArgAction};
 fn main() {
     let matches = command!()
         .arg(
-            arg!(-u --upto "Count map foldings for all n < N")
+            arg!(-u --upto "Count map foldings for all n ≤ N")
                 .required(false)
                 .action(ArgAction::SetTrue),
         )
