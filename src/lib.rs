@@ -24,7 +24,7 @@ impl MapFolding {
             return Err(());
         }
 
-        let mut present = vec![true; n + 1]; // 0th value is unused
+        let mut present = vec![false; n + 1]; // 0th value is unused
         for segment in indices[0..n].iter() {
             present[*segment as usize] = true;
         }
