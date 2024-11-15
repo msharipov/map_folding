@@ -79,4 +79,10 @@ mod tests {
         let indices = [5, 3, 1, 2, 1];
         assert_eq!((), MapFolding::from_standard_stack(&indices).unwrap_err());
     }
+
+    #[test]
+    fn from_standard_stack_extra_indices() {
+        let indices = [5, 3, 4, 5, 2, 1];
+        assert_eq!((), MapFolding::from_standard_stack(&indices).unwrap_err());
+    }
 }
