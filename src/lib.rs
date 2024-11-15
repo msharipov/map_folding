@@ -176,4 +176,17 @@ mod tests {
         let indices = [5, 3, 4, 5, 2, 1];
         assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
     }
+
+    #[test]
+    fn is_possible_8_zigzag() {
+        let zigzag =
+            MapFolding::from_stack(&[1, 2, 3, 4, 5, 6, 7, 8]).expect("failed to parse stack");
+        assert!(zigzag.is_foldable());
+    }
+
+    #[test]
+    fn is_possible_impossible_stack() {
+        let f = MapFolding::from_stack(&[5, 4, 3, 6, 2, 7, 1, 8]).expect("failed to parse stack");
+        assert!(!f.is_foldable());
+    }
 }
