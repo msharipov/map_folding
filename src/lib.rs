@@ -26,7 +26,7 @@ impl MapFolding {
     /// # Example:
     /// ```
     /// # use map_folding::MapFolding;
-    /// let f = MapFolding::from_standard_stack(&vec![1, 3, 4, 2]).unwrap();
+    /// let f = MapFolding::from_standard_stack(&[1, 3, 4, 2]).unwrap();
     ///
     /// assert_eq!(format!("{:?}", f.standard_stack()), "[1, 3, 4, 2]");
     /// ```
@@ -65,9 +65,9 @@ impl MapFolding {
     /// # Example
     /// ```
     /// # use map_folding::MapFolding;
-    /// let f = MapFolding::from_standard_stack(&vec![5, 2, 3, 4, 1]).unwrap();
+    /// let f = MapFolding::from_standard_stack(&[5, 2, 3, 4, 1]).unwrap();
     ///
-    /// assert_eq!(f.standard_stack(), vec![5, 2, 3, 4, 1]);
+    /// assert_eq!(f.standard_stack(), [5, 2, 3, 4, 1]);
     /// ```
     pub fn standard_stack(&self) -> &[u64] {
         &self.indices[..]
