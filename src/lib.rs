@@ -1,3 +1,5 @@
+use std::cmp::{max, min};
+
 /// Represents a 1-dimensional map folding.
 #[derive(Debug)]
 pub struct MapFolding {
@@ -99,8 +101,43 @@ impl MapFolding {
         positions
     }
 
-    pub fn is_valid_fold(&self) -> bool {
-        todo!()
+    pub fn is_foldable(&self) -> bool {
+        let n = self.indices.len();
+        let pos = self.positions();
+
+        let mut odd_joints: Vec<(usize, usize)> = vec![];
+        for odd_i in (1..n).step_by(2) {
+            let cur_pos = pos[odd_i];
+            let next_pos = pos[odd_i + 1];
+            for joint in &odd_joints {
+                let cur_inside = joint.0 < cur_pos && joint.1 > cur_pos;
+                let next_inside = joint.0 < next_pos && joint.1 > next_pos;
+                let joints_intersect = cur_inside ^ next_inside;
+                if joints_intersect {
+                    return false;
+                }
+            }
+            let new_joint = (min(cur_pos, next_pos), max(cur_pos, next_pos));
+            odd_joints.push(new_joint);
+        }
+
+        let mut even_joints: Vec<(usize, usize)> = vec![];
+        for even_i in (2..n).step_by(2) {
+            let cur_pos = pos[even_i];
+            let next_pos = pos[even_i + 1];
+            for joint in &even_joints {
+                let cur_inside = joint.0 < cur_pos && joint.1 > cur_pos;
+                let next_inside = joint.0 < next_pos && joint.1 > next_pos;
+                let joints_intersect = cur_inside ^ next_inside;
+                if joints_intersect {
+                    return false;
+                }
+            }
+            let new_joint = (min(cur_pos, next_pos), max(cur_pos, next_pos));
+            even_joints.push(new_joint);
+        }
+
+        true
     }
 }
 
