@@ -1,12 +1,13 @@
-// Represents a 1-dimensional map folding.
+/// Represents a 1-dimensional map folding.
 #[derive(Debug)]
 pub struct MapFolding {
-    // Representation of the folding in the standard stack form.
-    // The number of the lowest segment is at index 0 in the vector.
+    /// Representation of the folding in the standard stack form.
+    /// The number of the lowest segment is at index 0 in the vector.
     indices: Vec<u64>,
 }
 
 impl MapFolding {
+
     pub fn from_standard_stack(stack: &[u64]) -> Result<Self, ()> {
         let indices = Vec::from(stack);
         let n = indices.len();
