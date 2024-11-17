@@ -1,5 +1,5 @@
-use itertools::Itertools;
 use super::folding::MapFolding;
+use itertools::Itertools;
 use num::bigint::BigUint;
 
 pub enum CountingMethod1d {
@@ -9,7 +9,7 @@ pub enum CountingMethod1d {
 
 pub fn brute_force(n: usize) -> BigUint {
     if n == 0 {
-        return BigUint::ZERO
+        return BigUint::ZERO;
     }
     let perms = (1..(n + 1) as u64).permutations(n);
     let mut counter = BigUint::ZERO;
@@ -22,5 +22,5 @@ pub fn brute_force(n: usize) -> BigUint {
 }
 
 pub fn sawada_li(n: usize) -> BigUint {
-    return BigUint::ZERO
+    return BigUint::ZERO;
 }
