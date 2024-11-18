@@ -7,6 +7,19 @@ pub enum CountingMethod1d {
     SawadaLi,
 }
 
+/// Counts the number of possible 1-d foldings by checking every permutation of
+/// segments in the standard stack notation.
+///
+/// This algorithm is implemented primarily for reference and is not useful in
+/// practice due to O(n!) time complexity.
+///
+/// # Example
+/// ```
+/// use map_folding::one_d::counting::brute_force;
+/// use num::bigint::BigUint;
+///
+/// assert_eq!(BigUint::from(144u32), brute_force(6));
+/// ```
 pub fn brute_force(n: usize) -> BigUint {
     if n == 0 {
         return BigUint::ZERO;
