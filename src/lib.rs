@@ -14,7 +14,7 @@ use one_d::counting::CountingMethod1d;
 /// print_counts_1d(3, 9, CountingMethod1d::BruteForce);
 /// ```
 ///  Output:
-/// ```
+/// ```text
 /// 3 : 6
 /// 4 : 16
 /// 5 : 50
