@@ -101,6 +101,18 @@ impl MapFolding {
         positions
     }
 
+    /// Checks whether the map folding is physically possible.
+    ///
+    /// Runs in O(n^2) time.
+    ///
+    /// # Examples
+    /// ```
+    /// use map_folding::one_d::folding::MapFolding;
+    ///
+    /// assert!(MapFolding::from_stack(&[1, 2, 3, 4, 5]).unwrap().is_foldable());
+    ///
+    /// assert!(!MapFolding::from_stack(&[4, 2, 3, 1]).unwrap().is_foldable());
+    /// ```
     pub fn is_foldable(&self) -> bool {
         let n = self.indices.len();
         let pos = self.positions();
