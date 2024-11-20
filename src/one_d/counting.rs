@@ -28,7 +28,7 @@ pub fn brute_force(n: usize) -> BigUint {
     let mut counter = BigUint::ZERO;
     for p in perms {
         if MapFolding::from_stack(&p).unwrap().is_foldable() {
-            counter += 1 as u32;
+            counter += 1_u32;
         }
     }
     counter
