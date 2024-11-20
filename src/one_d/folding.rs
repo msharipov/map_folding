@@ -1,4 +1,11 @@
 use std::cmp::{max, min};
+use thiserror::Error;
+
+#[derive(Debug, Error, PartialEq)]
+pub enum InvalidFoldingError {
+    #[error("invalid standard stack")]
+    InvalidStack,
+}
 
 /// Represents a 1-dimensional map folding.
 #[derive(Debug)]
@@ -31,21 +38,21 @@ impl MapFolding {
     ///
     /// assert_eq!(format!("{:?}", f.stack()), "[1, 3, 4, 2]");
     /// ```
-    pub fn from_stack(stack: &[u64]) -> Result<Self, ()> {
+    pub fn from_stack(stack: &[u64]) -> Result<Self, InvalidFoldingError> {
         let indices = Vec::from(stack);
         let n = indices.len();
 
         let min_index = match indices.iter().min() {
             Some(&index) => index,
-            None => return Err(()),
+            None => return Err(InvalidFoldingError::InvalidStack),
         };
         let max_index = match indices.iter().max() {
             Some(&index) => index as usize,
-            None => return Err(()),
+            None => return Err(InvalidFoldingError::InvalidStack),
         };
 
         if min_index != 1 || max_index != n {
-            return Err(());
+            return Err(InvalidFoldingError::InvalidStack);
         }
 
         let mut present = vec![false; n + 1]; // 0th value is unused
@@ -57,7 +64,7 @@ impl MapFolding {
         if all_present {
             return Ok(MapFolding { indices });
         }
-        Err(())
+        Err(InvalidFoldingError::InvalidStack)
     }
 
     /// Returns the standard stack representation of the map folding as a list
@@ -168,25 +175,37 @@ mod tests {
     #[test]
     fn from_stack_invalid_indices() {
         let indices = [2, 5, 4, 3];
-        assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
+        assert_eq!(
+            InvalidFoldingError::InvalidStack,
+            MapFolding::from_stack(&indices).unwrap_err()
+        );
     }
 
     #[test]
     fn from_stack_invalid_indices_2() {
         let indices = [0, 1, 2, 3, 4];
-        assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
+        assert_eq!(
+            InvalidFoldingError::InvalidStack,
+            MapFolding::from_stack(&indices).unwrap_err()
+        );
     }
 
     #[test]
     fn from_stack_missing_indices() {
         let indices = [5, 3, 1, 2, 1];
-        assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
+        assert_eq!(
+            InvalidFoldingError::InvalidStack,
+            MapFolding::from_stack(&indices).unwrap_err()
+        );
     }
 
     #[test]
     fn from_stack_extra_indices() {
         let indices = [5, 3, 4, 5, 2, 1];
-        assert_eq!((), MapFolding::from_stack(&indices).unwrap_err());
+        assert_eq!(
+            InvalidFoldingError::InvalidStack,
+            MapFolding::from_stack(&indices).unwrap_err()
+        );
     }
 
     #[test]
