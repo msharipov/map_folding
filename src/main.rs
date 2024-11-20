@@ -1,5 +1,5 @@
 use clap::{arg, command, value_parser, ArgAction, Command};
-use map_folding::{one_d, print_counts_1d};
+use map_folding::{cli::print_counts_1d, one_d};
 
 fn main() {
     let matches = command!()
